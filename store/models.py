@@ -17,9 +17,10 @@ class Collection(models.Model):
 class Product(models.Model):
     # sku = models.CharField(max_length=10, primary_key=True)
     title = models.CharField(max_length=255)  # varchar(255)
+    slug = models.SlugField()
     description = models.TextField()
     # 9999.99
-    price = models.DecimalField(max_digits=6, decimal_places=2)
+    unit_price = models.DecimalField(max_digits=6, decimal_places=2)
     inventory = models.IntegerField()
     last_update = models.DateTimeField(auto_now=True)
     collection = models.ForeignKey(Collection, on_delete=models.PROTECT)
@@ -69,6 +70,7 @@ class OrderItem(models.Model):
 class Address(models.Model):
     street = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
+    # zip = models.CharField(max_length=12)
     customer = models.OneToOneField(
         Customer, on_delete=models.CASCADE, primary_key=True)
 
